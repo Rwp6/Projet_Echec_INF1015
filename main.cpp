@@ -76,6 +76,8 @@ ostream& operator<< (ostream& o, const Board& board) {
 			if (board.chessboard[i][j].piece != nullptr) {
 				allo += (board.chessboard[i][j].piece)->getCarac();
 				allo += " ";
+			} else {
+				allo += "  ";
 			}
 		}
 		allo += "\n";
@@ -85,8 +87,9 @@ ostream& operator<< (ostream& o, const Board& board) {
 
 int main() {
 	Board b = Board();
-	cout << *b.chessboard[0][0].piece;
-	//cout << b;
+	cout << *b.chessboard[1][0].piece;
 	cout << b;
-
+	cout << endl;
+	b.movePiece(*b.chessboard[0][0].piece, Pos(2, 0));
+	cout << b;
 }
