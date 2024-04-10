@@ -37,13 +37,32 @@ Board::Board() {
 
 bool Board::isMoveAvaliable(Color color, Pos pos) {
 	if (pos.x < 8 && pos.x > -1 && pos.y < 8 && pos.y > -1) {
-		if (getPiece(pos.x, pos.y) == nullptr) {
-			return true;
-		} else if (chessboard[pos.x][pos.y].piece.get()->color != color) {
-			return true;
-		}
+		return getPiece(pos.x, pos.y) == nullptr || chessboard[pos.x][pos.y].piece.get()->color != color;
 	}
 	return false;
+}
+
+bool Board::isMoveAvaliablePawn(Color color, Pos pos, Pos posPawn) {
+	if (pos.x < 8 && pos.x > -1 && pos.y < 8 && pos.y > -1) {
+		if(color == Color::Black){
+			if (pos - posPawn == Pos(1, 0)){
+				return getPiece(pos.x, pos.y) == nullptr;
+			} else if (pos - posPawn == Pos(2, 0)) {
+				return getPiece(pos.x, pos.y) == nullptr && posPawn.x == 1;
+			} else if (pos - posPawn == Pos(1, 1) || pos - posPawn == Pos(1, -1)) {
+				return getPiece(pos.x, pos.y) != nullptr && getPiece(pos.x, pos.y)->color != color;
+			}
+			return false;
+		} else {
+			if (pos - posPawn == Pos(-1, 0)) {
+				return getPiece(pos.x, pos.y) == nullptr;
+			} else if (pos - posPawn == Pos(-2, 0)) {
+				return getPiece(pos.x, pos.y) == nullptr && posPawn.x == 6;
+			} else if (pos - posPawn == Pos(1, 1) || pos - posPawn == Pos(1, -1)) {
+				return getPiece(pos.x, pos.y) == nullptr || getPiece(pos.x, pos.y)->color != color;
+			}
+		}
+	}
 }
 
 Piece* Board::getPiece(int x, int y) {
@@ -54,7 +73,13 @@ void Board::lookAvaliableMoveForPlayer(Piece& piece) {
 	if (getPiece(piece.pos.x, piece.pos.y)->name == PieceName::King) {
 
 	} else if (getPiece(piece.pos.x, piece.pos.y)->name == PieceName::Pawn) {
-
+		for (int i = 0; i < getPiece(piece.pos.x, piece.pos.y)->getMouvement().size(); i++) {
+			Pos p = getPiece(piece.pos.x, piece.pos.y)->pos + getPiece(piece.pos.x, piece.pos.y)->getMouvement()[i];
+			if (isMoveAvaliablePawn(piece.color, p, piece.pos)) {
+				piece.listMove.push_back(p);
+			}
+			
+		}
 	} else if (getPiece(piece.pos.x, piece.pos.y)->name == PieceName::Knight) {
 		for (int i = 0; i < getPiece(piece.pos.x, piece.pos.y)->getMouvement().size(); i++) {
 			Pos p = getPiece(piece.pos.x, piece.pos.y)->pos + getPiece(piece.pos.x, piece.pos.y)->getMouvement()[i];

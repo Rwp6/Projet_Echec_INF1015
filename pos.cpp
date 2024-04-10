@@ -9,6 +9,10 @@ Pos Pos::operator+(const Pos other) const {
 	return Pos(x + other.x, y + other.y);
 }
 
+Pos Pos::operator-(const Pos other) const {
+	return Pos(x - other.x, y - other.y);
+}
+
 Pos Pos::operator*(const int i) const {
 	return Pos(x + i * 1, y + i * 1);
 }

@@ -56,9 +56,11 @@ Knight::Knight(Color c, Pos p) : Piece(c, p, PieceName::Knight) {
 }
 
 Pawn::Pawn(Color c, Pos p) : Piece(c, p, PieceName::Pawn) {
-	if (c == Color::Black)
+	if (c == Color::Black){
+		mouvement = { Pos(2,0), Pos(1,0), Pos(1,1), Pos(1,-1) };
 		caracter = "\u2659";
-	else {
+	} else {
+		mouvement = { Pos(-2,0), Pos(-1,0), Pos(-1,1), Pos(-1,-1) };
 		caracter = "\u265F";
 	}
 }

@@ -89,9 +89,17 @@ int main(int argc, char *argv[])
 //int main() {
 //	Board b = Board();
 //	//Player bl = Player(Color::Black);
-//	cout << *b.chessboard[0][1].piece << b;
-//	b.movePiece(*b.chessboard[0][1].piece, Pos(2, 0));
-//	cout << *b.chessboard[2][0].piece << b ;
+//	cout << *b.chessboard[6][2].piece << b;
+//	b.movePiece(*b.chessboard[6][2].piece, Pos(4, 2));
+//	cout << b;
+//	/*b.movePiece(*b.chessboard[5][2].piece, Pos(4, 2));
+//	cout << b;*/
+//	b.movePiece(*b.chessboard[4][2].piece, Pos(3, 2));
+//	cout << b;
+//	b.movePiece(*b.chessboard[3][2].piece, Pos(2, 2));
+//	cout << b;
+//	b.movePiece(*b.chessboard[0][1].piece, Pos(2, 2));
+//	cout << b;
 //}
 
 #include "MainWindow.hpp"

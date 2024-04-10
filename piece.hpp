@@ -102,7 +102,7 @@ public:
 	const string getCarac() const override { return caracter; };
 	vector<Pos> getMouvement() override { return mouvement; };
 	string caracter;
-	vector<Pos> mouvement = { Pos(2,0), Pos(1,0), Pos(1,1), Pos(1,-1) };
+	vector<Pos> mouvement;
 	vector<Pos> listMove;
 
 private:
