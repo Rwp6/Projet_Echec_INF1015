@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QPushButton>
+#include "board.hpp" 
 
 class MainWindow : public QMainWindow
 {
@@ -14,6 +15,8 @@ public:
 private:
     QPushButton* chessBoard[8][8]; 
     void setupChessBoard();
+    Board logic;
+
 };
 
 #endif // MAINWINDOW_H
