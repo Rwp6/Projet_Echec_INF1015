@@ -55,6 +55,13 @@ void Board::lookAvaliableMoveForPlayer(Piece& piece) {
 
 	} else if (getPiece(piece.pos.x, piece.pos.y)->name == PieceName::Pawn) {
 
+	} else if (getPiece(piece.pos.x, piece.pos.y)->name == PieceName::Knight) {
+		for (int i = 0; i < getPiece(piece.pos.x, piece.pos.y)->getMouvement().size(); i++) {
+			Pos p = getPiece(piece.pos.x, piece.pos.y)->pos + getPiece(piece.pos.x, piece.pos.y)->getMouvement()[i];
+			if(isMoveAvaliable(piece.color, p)) {
+				piece.listMove.push_back(p);
+			}
+		}
 	} else {
 		int compteur = 0;
 		for (int i = 0; i < getPiece(piece.pos.x, piece.pos.y)->getMouvement().size(); i++) {
