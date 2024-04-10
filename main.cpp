@@ -41,7 +41,8 @@ int main(int argc, char *argv[])
 	return app.exec();
 }
 */
-//
+
+
 //#include <iostream>
 //#include "board.hpp"
 //#include "piece.hpp"
@@ -84,12 +85,11 @@ int main(int argc, char *argv[])
 //	}
 //	return o << allo << endl;
 //}
-//
+
 //int main() {
 //	Board b = Board();
-//	cout << *b.chessboard[1][0].piece;
-//	cout << b;
-//	cout << endl;
+//	//Player bl = Player(Color::Black);
+//	cout << *b.chessboard[0][0].piece << b << endl;
 //	b.movePiece(*b.chessboard[0][0].piece, Pos(2, 0));
 //	cout << b;
 //}

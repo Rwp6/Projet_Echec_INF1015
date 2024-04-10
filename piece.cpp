@@ -7,8 +7,8 @@ Piece::Piece(Color c, Pos p, PieceName n) {
 	name = n;
 }
 
-Piece* Piece::getPiece() { return nullptr; }
-const string Piece:: getCarac() const { return ""; }
+const string Piece::getCarac() const { return ""; }
+vector<Pos> Piece::getMouvement() { return {}; };
 
 
 //void Piece::remove() {
