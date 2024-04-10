@@ -41,55 +41,69 @@ int main(int argc, char *argv[])
 	return app.exec();
 }
 */
+//
+//#include <iostream>
+//#include "board.hpp"
+//#include "piece.hpp"
+//#include "pos.hpp"
+//#include "color.hpp"
+//#include "case.hpp"
+//
+//ostream& operator<< (ostream& o, const Piece& piece) {
+//	string c;
+//	string n;
+//	piece.color == Color::White ? c = "White" : c = "Black";
+//	if (piece.name == PieceName::Rook)
+//		n = "Rook";
+//	else if (piece.name == PieceName::Bishop)
+//		n = "Bishop";
+//	else if (piece.name == PieceName::Queen)
+//		n = "Queen";
+//	else if (piece.name == PieceName::King)
+//		n = "King";
+//	else if (piece.name == PieceName::Knight)
+//		n = "Knight";
+//	else
+//		n = "Pawn";
+//
+//	return o << n << " | " << piece.getCarac() << " | " << c << " | " << "(" << piece.pos.x << "," << piece.pos.y << ")" << " | " << endl;
+//}
+//
+//ostream& operator<< (ostream& o, const Board& board) {
+//	string allo;
+//	for (int i = 0; i < 8; i++) {
+//		for (int j = 0; j < 8; j++) {
+//			if (board.chessboard[i][j].piece != nullptr) {
+//				allo += (board.chessboard[i][j].piece)->getCarac();
+//				allo += " ";
+//			} else {
+//				allo += "  ";
+//			}
+//		}
+//		allo += "\n";
+//	}
+//	return o << allo << endl;
+//}
+//
+//int main() {
+//	Board b = Board();
+//	cout << *b.chessboard[1][0].piece;
+//	cout << b;
+//	cout << endl;
+//	b.movePiece(*b.chessboard[0][0].piece, Pos(2, 0));
+//	cout << b;
+//}
 
-#include <iostream>
-#include "board.hpp"
-#include "piece.hpp"
-#include "pos.hpp"
-#include "color.hpp"
-#include "case.hpp"
+#include "MainWindow.hpp"
+#include <QApplication>
 
-ostream& operator<< (ostream& o, const Piece& piece) {
-	string c;
-	string n;
-	piece.color == Color::White ? c = "White" : c = "Black";
-	if (piece.name == PieceName::Rook)
-		n = "Rook";
-	else if (piece.name == PieceName::Bishop)
-		n = "Bishop";
-	else if (piece.name == PieceName::Queen)
-		n = "Queen";
-	else if (piece.name == PieceName::King)
-		n = "King";
-	else if (piece.name == PieceName::Knight)
-		n = "Knight";
-	else
-		n = "Pawn";
+int main(int argc, char* argv[])
+{
+	QApplication app(argc, argv); 
 
-	return o << n << " | " << piece.getCarac() << " | " << c << " | " << "(" << piece.pos.x << "," << piece.pos.y << ")" << " | " << endl;
-}
+	MainWindow mainWindow;
+	mainWindow.resize(520, 520); 
+	mainWindow.show(); 
 
-ostream& operator<< (ostream& o, const Board& board) {
-	string allo;
-	for (int i = 0; i < 8; i++) {
-		for (int j = 0; j < 8; j++) {
-			if (board.chessboard[i][j].piece != nullptr) {
-				allo += (board.chessboard[i][j].piece)->getCarac();
-				allo += " ";
-			} else {
-				allo += "  ";
-			}
-		}
-		allo += "\n";
-	}
-	return o << allo << endl;
-}
-
-int main() {
-	Board b = Board();
-	cout << *b.chessboard[1][0].piece;
-	cout << b;
-	cout << endl;
-	b.movePiece(*b.chessboard[0][0].piece, Pos(2, 0));
-	cout << b;
+	return app.exec(); 
 }

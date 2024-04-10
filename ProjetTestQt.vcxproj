@@ -119,6 +119,7 @@
     <ClCompile Include="case.cpp" />
     <ClCompile Include="googletest\src\gtest-all.cc" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="piece.cpp" />
     <ClCompile Include="pos.cpp" />
     <ClCompile Include="TestCalc.cpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="board.hpp" />
     <ClInclude Include="case.hpp" />
     <ClInclude Include="color.hpp" />
+    <QtMoc Include="MainWindow.hpp" />
     <ClInclude Include="piece.hpp" />
     <ClInclude Include="pos.hpp" />
   </ItemGroup>
