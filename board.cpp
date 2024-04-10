@@ -1,5 +1,7 @@
 #include "board.hpp"
 #include <memory>
+#include <iostream>
+#include <algorithm>
 
 Board::Board() {
 	chessboard = vector<vector<Case>>(8, vector<Case>(8));
@@ -26,17 +28,54 @@ Board::Board() {
 	chessboard[0][0].piece = make_unique<Rook>(Color::Black, Pos(0, 0));
 	chessboard[0][1].piece = make_unique<Knight>(Color::Black, Pos(0, 1));
 	chessboard[0][2].piece = make_unique<Bishop>(Color::Black, Pos(0, 2));
-	chessboard[0][3].piece = make_unique<Queen>(Color::Black, Pos(0, 3));
+	chessboard[0][3].piece = make_unique<Queen>(Color::Black, Pos(4, 3));
 	chessboard[0][4].piece = make_unique<King>(Color::Black, Pos(0, 4));
 	chessboard[0][5].piece = make_unique<Bishop>(Color::Black, Pos(0, 5));
 	chessboard[0][6].piece = make_unique<Knight>(Color::Black, Pos(0, 6));
 	chessboard[0][7].piece = make_unique<Rook>(Color::Black, Pos(0, 7));
 }
 
+bool Board::isMoveAvaliable(Color color, Pos pos) {
+	if (pos.x < 8 && pos.x > -1 && pos.y < 8 && pos.y > -1) {
+		if (getPiece(pos.x, pos.y) == nullptr) {
+			return true;
+		} else if (chessboard[pos.x][pos.y].piece.get()->color != color) {
+			return true;
+		}
+	}
+	return false;
+}
+
+Piece* Board::getPiece(int x, int y) {
+	return chessboard[x][y].piece.get();
+}
+
+void Board::lookAvaliableMoveForPlayer(Piece& piece) {
+	if (getPiece(piece.pos.x, piece.pos.y)->name == PieceName::King) {
+
+	} else if (getPiece(piece.pos.x, piece.pos.y)->name == PieceName::Pawn) {
+
+	} else {
+		int compteur = 0;
+		for (int i = 0; i < getPiece(piece.pos.x, piece.pos.y)->getMouvement().size(); i++) {
+			Pos p = getPiece(piece.pos.x, piece.pos.y)->pos + getPiece(piece.pos.x, piece.pos.y)->getMouvement()[i];
+			Pos po = p;
+			while (isMoveAvaliable(piece.color, po)) {
+				piece.listMove.push_back(p * compteur);
+				compteur += 1;
+				po = p * compteur;
+			}
+			compteur = 0;
+		}
+	}
+}
+
 void Board::movePiece(Piece& piece, const Pos& newPos) {
-	chessboard[newPos.x][newPos.y].piece = move(chessboard[piece.pos.x][piece.pos.y].piece);
-	chessboard[newPos.x][newPos.y].piece->pos = newPos;
-	//chessboard[piece.pos.x][piece.pos.y].piece = nullptr;
+	lookAvaliableMoveForPlayer(piece);
+	if (find(piece.listMove.begin(), piece.listMove.end(), newPos) != piece.listMove.end()) {
+		chessboard[newPos.x][newPos.y].piece = move(chessboard[piece.pos.x][piece.pos.y].piece);
+		chessboard[newPos.x][newPos.y].piece->pos = newPos;
+	}
 }
 
 
