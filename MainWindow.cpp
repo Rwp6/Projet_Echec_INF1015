@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
 void MainWindow::setupChessBoard() {
 
     
-    QColor light("#F50B0B");
+    QColor light("#6C6C6C");
     QColor dark("#292626");
     for (int row = 0; row < 8; ++row) {
         for (int col = 0; col < 8; ++col) {
