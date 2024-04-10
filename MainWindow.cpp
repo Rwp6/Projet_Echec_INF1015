@@ -51,6 +51,43 @@ void MainWindow::setupChessBoard() {
             
         }
     }
-
+    for (int row = 0; row < 8; ++row) {
+        for (int col = 0; col < 8; ++col) {
+            connect(chessBoard[row][col], &QPushButton::clicked, [this, row, col]() {
+                this->handleChessSquareClicked(row, col);
+                });
+        }
+    }
 }
 
+void MainWindow::handleChessSquareClicked(int row, int col) {
+    if (!selectedPiecePos) {
+        if (logic.chessboard[row][col].piece != nullptr) { 
+            selectedPiecePos = Pos(row, col); 
+            
+        }
+    }
+    else {
+        if (selectedPiecePos->x != row || selectedPiecePos->y != col) { 
+            logic.movePiece(*(logic.chessboard[selectedPiecePos->x][selectedPiecePos->y].piece), Pos(row, col));
+            selectedPiecePos = std::nullopt; 
+            updateChessBoardUI(); 
+        }
+    }
+}
+void MainWindow::updateChessBoardUI() {
+    for (int row = 0; row < 8; ++row) {
+        for (int col = 0; col < 8; ++col) {
+            auto& piece = logic.chessboard[row][col].piece;
+
+            if (piece) {
+                QString pieceUnicode = QString::fromStdString(piece->getCarac());
+                chessBoard[row][col]->setText(pieceUnicode);
+            }
+            else {
+                chessBoard[row][col]->setText("");
+            }
+
+        }
+    }
+}

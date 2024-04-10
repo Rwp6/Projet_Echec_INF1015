@@ -16,7 +16,9 @@ private:
     QPushButton* chessBoard[8][8]; 
     void setupChessBoard();
     Board logic;
-
+    optional<Pos> selectedPiecePos = std::nullopt;
+    void handleChessSquareClicked(int row, int col);
+    void updateChessBoardUI();
 };
 
 #endif // MAINWINDOW_H
