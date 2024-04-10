@@ -3,8 +3,6 @@
 #include <QWidget>
 
 
-QColor creamColor("#F5F5DC");
-QColor darkGrayColor("#A9A9A9");
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
 {
