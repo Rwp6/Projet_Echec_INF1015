@@ -66,19 +66,23 @@ void MainWindow::handleChessSquareClicked(int row, int col) {
     if (!selectedPiecePos) {
         if (logic.chessboard[row][col].piece != nullptr) {
             selectedPiecePos = Pos(row, col);
-            
+            chessBoard[row][col]->setStyleSheet("background-color: #FFD700;");
         }
     }
     else {
         if (selectedPiecePos->x != row || selectedPiecePos->y != col) {
             bool moveSuccessful = logic.movePiece(*(logic.chessboard[selectedPiecePos->x][selectedPiecePos->y].piece), Pos(row, col));
             if (!moveSuccessful) {
-                
                 chessBoard[row][col]->setStyleSheet("background-color: red;");
                 QTimer::singleShot(1000, [this, row, col]() { updateChessSquareColor(row, col); }); 
             }
+            updateChessSquareColor(selectedPiecePos->x, selectedPiecePos->y);
             selectedPiecePos = std::nullopt;
             updateChessBoardUI();
+        }
+        else {
+            updateChessSquareColor(row, col);
+            selectedPiecePos = std::nullopt;
         }
     }
 }
