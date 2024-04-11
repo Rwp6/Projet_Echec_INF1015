@@ -3,6 +3,14 @@
 #include <iostream>
 #include <algorithm>
 
+Board::Board(int i) {
+	chessboard = vector<vector<Case>>(8, vector<Case>(8));
+	chessboard[7][0].piece = make_unique<Rook>(Color::White, Pos(7, 0));
+	chessboard[0][0].piece = make_unique<Bishop>(Color::White, Pos(0, 0));
+	chessboard[0][7].piece = make_unique<Queen>(Color::White, Pos(0, 7));
+
+}
+
 Board::Board() {
 	chessboard = vector<vector<Case>>(8, vector<Case>(8));
 
@@ -93,9 +101,9 @@ void Board::lookAvaliableMoveForPlayer(Piece& piece) {
 			Pos p = getPiece(piece.pos.x, piece.pos.y)->pos + getPiece(piece.pos.x, piece.pos.y)->getMouvement()[i];
 			Pos po = p;
 			while (isMoveAvaliable(piece.color, po)) {
-				piece.listMove.push_back(p * compteur);
+				piece.listMove.push_back(po);
 				compteur += 1;
-				po = p * compteur;
+				po = p + getPiece(piece.pos.x, piece.pos.y)->getMouvement()[i]*compteur;
 			}
 			compteur = 0;
 		}

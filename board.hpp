@@ -6,6 +6,7 @@
 class Board {
 public:
 	Board();
+	Board(int i);
 	~Board() {};
 	Piece* getPiece(int x, int y);
 	bool isMoveAvaliable(Color color, Pos pos);

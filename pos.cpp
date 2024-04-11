@@ -14,7 +14,7 @@ Pos Pos::operator-(const Pos other) const {
 }
 
 Pos Pos::operator*(const int i) const {
-	return Pos(x + i * 1, y + i * 1);
+	return Pos(x * i, y * i);
 }
 
 bool Pos::operator==(const Pos other) const {

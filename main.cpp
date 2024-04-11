@@ -43,75 +43,78 @@ int main(int argc, char *argv[])
 */
 
 
-//#include <iostream>
-//#include "board.hpp"
-//#include "piece.hpp"
-//#include "pos.hpp"
-//#include "color.hpp"
-//#include "case.hpp"
-//
-//ostream& operator<< (ostream& o, const Piece& piece) {
-//	string c;
-//	string n;
-//	piece.color == Color::White ? c = "White" : c = "Black";
-//	if (piece.name == PieceName::Rook)
-//		n = "Rook";
-//	else if (piece.name == PieceName::Bishop)
-//		n = "Bishop";
-//	else if (piece.name == PieceName::Queen)
-//		n = "Queen";
-//	else if (piece.name == PieceName::King)
-//		n = "King";
-//	else if (piece.name == PieceName::Knight)
-//		n = "Knight";
-//	else
-//		n = "Pawn";
-//
-//	return o << n << " | " << piece.getCarac() << " | " << c << " | " << "(" << piece.pos.x << "," << piece.pos.y << ")" << " | " << endl;
-//}
-//
-//ostream& operator<< (ostream& o, const Board& board) {
-//	string allo;
-//	for (int i = 0; i < 8; i++) {
-//		for (int j = 0; j < 8; j++) {
-//			if (board.chessboard[i][j].piece != nullptr) {
-//				allo += (board.chessboard[i][j].piece)->getCarac();
-//				allo += " ";
-//			} else {
-//				allo += "  ";
-//			}
-//		}
-//		allo += "\n";
-//	}
-//	return o << allo << endl;
-//}
-//
-//int main() {
-//	Board b = Board();
-//	//Player bl = Player(Color::Black);
-//	cout << *b.chessboard[6][2].piece << b;
-//	b.movePiece(*b.chessboard[6][2].piece, Pos(4, 2));
-//	cout << b;
-//	/*b.movePiece(*b.chessboard[5][2].piece, Pos(4, 2));
-//	cout << b;*/
-//	b.movePiece(*b.chessboard[4][2].piece, Pos(3, 2));
-//	cout << b;
-//	b.movePiece(*b.chessboard[3][2].piece, Pos(2, 2));
-//	cout << b;
-//	b.movePiece(*b.chessboard[0][1].piece, Pos(2, 2));
-//	cout << b;
-//}
+#include <iostream>
+#include "board.hpp"
+#include "piece.hpp"
+#include "pos.hpp"
+#include "color.hpp"
+#include "case.hpp"
 
-#include "MainWindow.hpp"
-#include <QApplication>
+ostream& operator<< (ostream& o, const Piece& piece) {
+	string c;
+	string n;
+	piece.color == Color::White ? c = "White" : c = "Black";
+	if (piece.name == PieceName::Rook)
+		n = "Rook";
+	else if (piece.name == PieceName::Bishop)
+		n = "Bishop";
+	else if (piece.name == PieceName::Queen)
+		n = "Queen";
+	else if (piece.name == PieceName::King)
+		n = "King";
+	else if (piece.name == PieceName::Knight)
+		n = "Knight";
+	else
+		n = "Pawn";
 
-int main(int argc, char* argv[])
-{
-	QApplication app(argc, argv); 
-
-	MainWindow mainWindow;
-	mainWindow.resize(520, 520); 
-	mainWindow.show(); 
-
-	return app.exec(); 
+	return o << n << " | " << piece.getCarac() << " | " << c << " | " << "(" << piece.pos.x << "," << piece.pos.y << ")" << " | " << endl;
 }
+
+ostream& operator<< (ostream& o, const Board& board) {
+	string allo;
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j < 8; j++) {
+			if (board.chessboard[i][j].piece != nullptr) {
+				allo += (board.chessboard[i][j].piece)->getCarac();
+				allo += " ";
+			} else {
+				allo += "  ";
+			}
+		}
+		allo += "\n";
+	}
+	return o << allo << endl;
+}
+
+int main() {
+	Board b = Board(1);
+
+	cout << b;
+	b.movePiece(*b.chessboard[0][0].piece, Pos(1, 1));
+	b.movePiece(*b.chessboard[7][0].piece, Pos(0, 0));
+	b.movePiece(*b.chessboard[0][7].piece, Pos(7,7));
+	cout << b;
+	/*cout << *b.chessboard[6][2].piece << b;
+	b.movePiece(*b.chessboard[6][2].piece, Pos(4, 2));
+	cout << b;
+	b.movePiece(*b.chessboard[4][2].piece, Pos(3, 2));
+	cout << b;
+	b.movePiece(*b.chessboard[3][2].piece, Pos(2, 2));
+	cout << b;
+	b.movePiece(*b.chessboard[0][1].piece, Pos(2, 2));
+	cout << b;*/
+}
+
+//#include "MainWindow.hpp"
+//#include <QApplication>
+//
+//int main(int argc, char* argv[])
+//{
+//	QApplication app(argc, argv); 
+//
+//	MainWindow mainWindow;
+//	mainWindow.resize(520, 520); 
+//	mainWindow.show(); 
+//
+//	return app.exec(); 
+//}
