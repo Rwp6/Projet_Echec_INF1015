@@ -36,7 +36,7 @@ Board::Board() {
 	chessboard[0][0].piece = make_unique<Rook>(Color::Black, Pos(0, 0));
 	chessboard[0][1].piece = make_unique<Knight>(Color::Black, Pos(0, 1));
 	chessboard[0][2].piece = make_unique<Bishop>(Color::Black, Pos(0, 2));
-	chessboard[0][3].piece = make_unique<Queen>(Color::Black, Pos(4, 3));
+	chessboard[0][3].piece = make_unique<Queen>(Color::Black, Pos(0, 3));
 	chessboard[0][4].piece = make_unique<King>(Color::Black, Pos(0, 4));
 	chessboard[0][5].piece = make_unique<Bishop>(Color::Black, Pos(0, 5));
 	chessboard[0][6].piece = make_unique<Knight>(Color::Black, Pos(0, 6));
