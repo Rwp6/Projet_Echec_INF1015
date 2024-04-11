@@ -66,16 +66,16 @@ void MainWindow::handleChessSquareClicked(int row, int col) {
     if (!selectedPiecePos) {
         if (logic.chessboard[row][col].piece != nullptr) {
             selectedPiecePos = Pos(row, col);
-            // Optionnel: marquez la sélection d'une pièce ici, par exemple en changeant la couleur de fond
+            
         }
     }
     else {
         if (selectedPiecePos->x != row || selectedPiecePos->y != col) {
             bool moveSuccessful = logic.movePiece(*(logic.chessboard[selectedPiecePos->x][selectedPiecePos->y].piece), Pos(row, col));
             if (!moveSuccessful) {
-                // Changez la couleur de la case en rouge si le mouvement est invalide
+                
                 chessBoard[row][col]->setStyleSheet("background-color: red;");
-                QTimer::singleShot(1000, [this, row, col]() { updateChessSquareColor(row, col); }); // Réinitialiser après 1 seconde
+                QTimer::singleShot(1000, [this, row, col]() { updateChessSquareColor(row, col); }); 
             }
             selectedPiecePos = std::nullopt;
             updateChessBoardUI();
