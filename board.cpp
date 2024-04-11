@@ -67,7 +67,7 @@ bool Board::isMoveAvaliablePawn(Color color, Pos pos, Pos posPawn) {
 				return getPiece(pos.x, pos.y) == nullptr;
 			} else if (pos - posPawn == Pos(-2, 0)) {
 				return getPiece(pos.x, pos.y) == nullptr && posPawn.x == 6;
-			} else if (pos - posPawn == Pos(1, 1) || pos - posPawn == Pos(1, -1)) {
+			} else if (pos - posPawn == Pos(-1, 1) || pos - posPawn == Pos(-1, -1)) {
 				return getPiece(pos.x, pos.y) == nullptr || getPiece(pos.x, pos.y)->color != color;
 			}
 			return false;
