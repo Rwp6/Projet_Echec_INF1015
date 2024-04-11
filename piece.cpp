@@ -8,12 +8,7 @@ Piece::Piece(Color c, Pos p, PieceName n) {
 }
 
 const string Piece::getCarac() const { return ""; }
-vector<Pos> Piece::getMouvement() { return {}; };
-
-
-//void Piece::remove() {
-//	Piece::~Piece(); //PAS SUR
-//};
+vector<Pos> Piece::getMouvement() { return {}; }
 
 King::King(Color c, Pos p) : Piece(c, p, PieceName::King) {
 	if (c == Color::Black)

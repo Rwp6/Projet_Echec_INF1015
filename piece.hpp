@@ -33,6 +33,9 @@ public:
 private:
 };
 
+
+
+
 class King : public Piece {
 public:
 	King(Color c, Pos p);

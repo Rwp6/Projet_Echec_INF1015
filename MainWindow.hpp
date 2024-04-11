@@ -5,21 +5,24 @@
 #include <QPushButton>
 #include "board.hpp" 
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+using gameManagement::Board;
 
-public:
-    explicit MainWindow(QWidget* parent = nullptr);
+namespace interface {
+    class MainWindow : public QMainWindow
+    {
+        Q_OBJECT
 
-private:
-    QPushButton* chessBoard[8][8]; 
-    void setupChessBoard();
-    Board logic;
-    optional<Pos> selectedPiecePos = std::nullopt;
-    void handleChessSquareClicked(int row, int col);
-    void updateChessBoardUI();
-    void updateChessSquareColor(int row, int col);
+    public:
+        explicit MainWindow(QWidget* parent = nullptr);
+
+    private:
+        QPushButton* chessBoard[8][8]; 
+        void setupChessBoard();
+        Board logic;
+        optional<Pos> selectedPiecePos = std::nullopt;
+        void handleChessSquareClicked(int row, int col);
+        void updateChessBoardUI();
+        void updateChessSquareColor(int row, int col);
+    };
+    #endif // MAINWINDOW_H
 };
-
-#endif // MAINWINDOW_H
