@@ -80,6 +80,7 @@ Piece* Board::getPiece(int x, int y) {
 }
 
 void Board::lookAvaliableMoveForPlayer(Piece& piece) {
+	piece.listMove = {};
 	if (getPiece(piece.pos.x, piece.pos.y)->name == PieceName::King) {
 		for (int i = 0; i < getPiece(piece.pos.x, piece.pos.y)->getMouvement().size(); i++) {
 			Pos p = getPiece(piece.pos.x, piece.pos.y)->pos + getPiece(piece.pos.x, piece.pos.y)->getMouvement()[i];
