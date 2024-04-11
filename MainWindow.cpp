@@ -31,7 +31,7 @@ void MainWindow::setupChessBoard() {
     for (int row = 0; row < 8; ++row) {
         for (int col = 0; col < 8; ++col) {
             chessBoard[row][col] = new QPushButton(this);
-            chessBoard[row][col]->setFixedSize(64, 64); 
+            chessBoard[row][col]->setFixedSize(100, 100); 
 
             
             auto piece = logic.chessboard[row][col].piece.get(); 
@@ -41,7 +41,7 @@ void MainWindow::setupChessBoard() {
             }
 
             QFont font = chessBoard[row][col]->font();
-            font.setPointSize(20); 
+            font.setPointSize(40); 
             chessBoard[row][col]->setFont(font);
 
             QColor color = ((row + col) % 2 == 0) ? light : dark;

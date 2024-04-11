@@ -3,7 +3,7 @@
 #include <iostream>
 #include <algorithm>
 
-Board::Board() {
+Board::Board(int i) {
 	chessboard = vector<vector<Case>>(8, vector<Case>(8));
 	chessboard[7][0].piece = make_unique<Rook>(Color::White, Pos(7, 0));
 	chessboard[7][4].piece = make_unique<King>(Color::White, Pos(7, 4));
@@ -12,7 +12,7 @@ Board::Board() {
 	chessboard[0][4].piece = make_unique<King>(Color::Black, Pos(0, 4));
 }
 
-Board::Board(int i) {
+Board::Board() {
 	chessboard = vector<vector<Case>>(8, vector<Case>(8));
 
 	chessboard[7][0].piece = make_unique<Rook>(Color::White, Pos(7, 0));
