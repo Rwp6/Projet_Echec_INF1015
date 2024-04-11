@@ -1,6 +1,7 @@
 #include "MainWindow.hpp"
 #include <QGridLayout>
 #include <QWidget>
+#include <QTimer>
 
 
 
@@ -63,19 +64,32 @@ void MainWindow::setupChessBoard() {
 
 void MainWindow::handleChessSquareClicked(int row, int col) {
     if (!selectedPiecePos) {
-        if (logic.chessboard[row][col].piece != nullptr) { 
-            selectedPiecePos = Pos(row, col); 
-            
+        if (logic.chessboard[row][col].piece != nullptr) {
+            selectedPiecePos = Pos(row, col);
+            // Optionnel: marquez la sélection d'une pièce ici, par exemple en changeant la couleur de fond
         }
     }
     else {
-        if (selectedPiecePos->x != row || selectedPiecePos->y != col) { 
-            logic.movePiece(*(logic.chessboard[selectedPiecePos->x][selectedPiecePos->y].piece), Pos(row, col));
-            selectedPiecePos = std::nullopt; 
-            updateChessBoardUI(); 
+        if (selectedPiecePos->x != row || selectedPiecePos->y != col) {
+            bool moveSuccessful = logic.movePiece(*(logic.chessboard[selectedPiecePos->x][selectedPiecePos->y].piece), Pos(row, col));
+            if (!moveSuccessful) {
+                // Changez la couleur de la case en rouge si le mouvement est invalide
+                chessBoard[row][col]->setStyleSheet("background-color: red;");
+                QTimer::singleShot(1000, [this, row, col]() { updateChessSquareColor(row, col); }); // Réinitialiser après 1 seconde
+            }
+            selectedPiecePos = std::nullopt;
+            updateChessBoardUI();
         }
     }
 }
+
+void MainWindow::updateChessSquareColor(int row, int col) {
+    QColor light("#6C6C6C");
+    QColor dark("#292626");
+    QColor color = ((row + col) % 2 == 0) ? light : dark;
+    chessBoard[row][col]->setStyleSheet(QString("background-color: %1;").arg(color.name()));
+}
+
 void MainWindow::updateChessBoardUI() {
     for (int row = 0; row < 8; ++row) {
         for (int col = 0; col < 8; ++col) {

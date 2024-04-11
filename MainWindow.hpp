@@ -19,6 +19,7 @@ private:
     optional<Pos> selectedPiecePos = std::nullopt;
     void handleChessSquareClicked(int row, int col);
     void updateChessBoardUI();
+    void updateChessSquareColor(int row, int col);
 };
 
 #endif // MAINWINDOW_H

@@ -118,12 +118,14 @@ void Board::lookAvaliableMoveForPlayer(Piece& piece) {
 	}
 }
 
-void Board::movePiece(Piece& piece, const Pos& newPos) {
+bool Board::movePiece(Piece& piece, const Pos& newPos) {
 	lookAvaliableMoveForPlayer(piece);
 	if (find(piece.listMove.begin(), piece.listMove.end(), newPos) != piece.listMove.end()) {
 		chessboard[newPos.x][newPos.y].piece = move(chessboard[piece.pos.x][piece.pos.y].piece);
 		chessboard[newPos.x][newPos.y].piece->pos = newPos;
+		return true; 
 	}
+	return false; 
 }
 
 
