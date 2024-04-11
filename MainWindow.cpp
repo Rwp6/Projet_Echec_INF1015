@@ -18,7 +18,8 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent)
             layout->addWidget(chessBoard[row][col], row, col); 
         }
     }
-
+    layout->setRowStretch(8, 1);
+    layout->setColumnStretch(8, 1);
     centralWidget->setLayout(layout); 
     setCentralWidget(centralWidget); 
 }
