@@ -1,9 +1,9 @@
+#ifndef CASE_HPP
+#define CASE_HPP
+
 #include "piece.hpp"
 #include <tuple>
 #include <memory>
-
-#ifndef CASE_HPP
-#define CASE_HPP
 
 class Case {
 public:

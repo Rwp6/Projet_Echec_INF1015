@@ -1,3 +1,6 @@
+#ifndef PIECE_HPP
+#define PIECE_HPP
+
 #include "color.hpp"
 #include <tuple>
 #include <vector>
@@ -5,9 +8,6 @@
 #include "pos.hpp"
 
 using namespace std;
-
-#ifndef PIECE_HPP
-#define PIECE_HPP
 
 enum class PieceName {
 	Rook,

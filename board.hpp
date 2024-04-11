@@ -1,3 +1,6 @@
+#ifndef BARD_HPP
+#define BOARD_HPP
+
 #include <vector>
 #include "color.hpp"
 #include "case.hpp"
@@ -17,3 +20,5 @@ public:
 	vector<vector<Case>> chessboard;
 private:
 };
+
+#endif

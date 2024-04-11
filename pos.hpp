@@ -14,4 +14,5 @@ public:
 	int y;
 private:
 };
+
 #endif

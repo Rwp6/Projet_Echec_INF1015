@@ -3,15 +3,16 @@
 #include <iostream>
 #include <algorithm>
 
-Board::Board(int i) {
+Board::Board() {
 	chessboard = vector<vector<Case>>(8, vector<Case>(8));
 	chessboard[7][0].piece = make_unique<Rook>(Color::White, Pos(7, 0));
-	chessboard[0][0].piece = make_unique<Bishop>(Color::White, Pos(0, 0));
-	chessboard[0][7].piece = make_unique<Queen>(Color::White, Pos(0, 7));
-
+	chessboard[7][4].piece = make_unique<King>(Color::White, Pos(7, 4));
+	chessboard[7][3].piece = make_unique<Queen>(Color::White, Pos(7, 3));
+	
+	chessboard[0][4].piece = make_unique<King>(Color::Black, Pos(0, 4));
 }
 
-Board::Board() {
+Board::Board(int i) {
 	chessboard = vector<vector<Case>>(8, vector<Case>(8));
 
 	chessboard[7][0].piece = make_unique<Rook>(Color::White, Pos(7, 0));
@@ -79,7 +80,12 @@ Piece* Board::getPiece(int x, int y) {
 
 void Board::lookAvaliableMoveForPlayer(Piece& piece) {
 	if (getPiece(piece.pos.x, piece.pos.y)->name == PieceName::King) {
-
+		for (int i = 0; i < getPiece(piece.pos.x, piece.pos.y)->getMouvement().size(); i++) {
+			Pos p = getPiece(piece.pos.x, piece.pos.y)->pos + getPiece(piece.pos.x, piece.pos.y)->getMouvement()[i];
+			if (isMoveAvaliable(piece.color, p)) {
+				piece.listMove.push_back(p);
+			}
+		}
 	} else if (getPiece(piece.pos.x, piece.pos.y)->name == PieceName::Pawn) {
 		for (int i = 0; i < getPiece(piece.pos.x, piece.pos.y)->getMouvement().size(); i++) {
 			Pos p = getPiece(piece.pos.x, piece.pos.y)->pos + getPiece(piece.pos.x, piece.pos.y)->getMouvement()[i];
