@@ -6,7 +6,7 @@
 
 namespace gameManagement{
 	Board::Board(int i) {
-		chessboard = vector<vector<Case>>(8, vector<Case>(8));
+		chessboard = vector<vector<Case>>(boardSize, vector<Case>(boardSize));
 		chessboard[7][0].piece = make_unique<Rook>(Color::White, Pos(7, 0));
 		chessboard[7][4].piece = make_unique<King>(Color::White, Pos(7, 4));
 		chessboard[7][3].piece = make_unique<Queen>(Color::White, Pos(7, 3));
@@ -15,7 +15,7 @@ namespace gameManagement{
 	}
 
 	Board::Board() {
-		chessboard = vector<vector<Case>>(8, vector<Case>(8));
+		chessboard = vector<vector<Case>>(boardSize, vector<Case>(boardSize));
 
 		chessboard[7][0].piece = make_unique<Rook>(Color::White, Pos(7, 0));
 		chessboard[7][1].piece = make_unique<Knight>(Color::White, Pos(7, 1));
@@ -25,38 +25,38 @@ namespace gameManagement{
 		chessboard[7][5].piece = make_unique<Bishop>(Color::White, Pos(7, 5));
 		chessboard[7][6].piece = make_unique<Knight>(Color::White, Pos(7, 6));
 		chessboard[7][7].piece = make_unique<Rook>(Color::White, Pos(7, 7));
-		for (int i = 0; i < 8; i++)
+		for (int i = 0; i < boardSize; i++)
 			chessboard[6][i].piece = make_unique<Pawn>(Color::White, Pos(6, i));
 
 		for (int i = 2; i < 5; i++) {
-			for (int j = 0; j < 8; j++) {
+			for (int j = 0; j < boardSize; j++) {
 				chessboard[i][j].piece = nullptr;
 			}
 		}
 
-		for (int i = 0; i < 8; i++)
-			chessboard[1][i].piece = make_unique<Pawn>(Color::Black, Pos(1, i));
 		chessboard[0][0].piece = make_unique<Rook>(Color::Black, Pos(0, 0));
 		chessboard[0][1].piece = make_unique<Knight>(Color::Black, Pos(0, 1));
 		chessboard[0][2].piece = make_unique<Bishop>(Color::Black, Pos(0, 2));
 		chessboard[0][3].piece = make_unique<Queen>(Color::Black, Pos(0, 3));
 		chessboard[0][4].piece = make_unique<King>(Color::Black, Pos(0, 4));
 		chessboard[0][5].piece = make_unique<Bishop>(Color::Black, Pos(0, 5));
-		chessboard[0][6].piece = make_unique<Knight>(Color::Black, Pos(0, 6));
+	chessboard[0][6].piece = make_unique<Knight>(Color::Black, Pos(0, 6));
 		chessboard[0][7].piece = make_unique<Rook>(Color::Black, Pos(0, 7));
+		for (int i = 0; i < boardSize; i++)
+			chessboard[1][i].piece = make_unique<Pawn>(Color::Black, Pos(1, i));
 	}
 
 	bool Board::isMoveAvaliable(Color color, Pos pos) {
-		if (pos.x < 8 && pos.x > -1 && pos.y < 8 && pos.y > -1) {
+		if (pos.x < boardSize && pos.x >= 0 && pos.y < boardSize && pos.y >= 0) {
 			return getPiece(pos.x, pos.y) == nullptr || chessboard[pos.x][pos.y].piece.get()->color != color;
 		}
 		return false;
 	}
 
 	bool Board::isMoveAvaliablePawn(Color color, Pos pos, Pos posPawn) {
-		if (pos.x < 8 && pos.x > -1 && pos.y < 8 && pos.y > -1) {
-			if(color == Color::Black){
-				if (pos - posPawn == Pos(1, 0)){
+		if (pos.x < boardSize && pos.x >= 0 && pos.y < boardSize && pos.y >= 0) {
+			if (color == Color::Black) {
+				if (pos - posPawn == Pos(1, 0)) {
 					return getPiece(pos.x, pos.y) == nullptr;
 				} else if (pos - posPawn == Pos(2, 0)) {
 					return getPiece(pos.x, pos.y) == nullptr && posPawn.x == 1;
@@ -84,27 +84,30 @@ namespace gameManagement{
 	void Board::lookAvaliableMoveForPlayer(Piece& piece) {
 		piece.listMove = {};
 		switch (getPiece(piece.pos.x, piece.pos.y)->name) {
-		case(PieceName::King):
+		case PieceName::King:
 			for (int i = 0; i < getPiece(piece.pos.x, piece.pos.y)->getMouvement().size(); i++) {
 				Pos p = getPiece(piece.pos.x, piece.pos.y)->pos + getPiece(piece.pos.x, piece.pos.y)->getMouvement()[i];
 				if (isMoveAvaliable(piece.color, p)) {
 					piece.listMove.push_back(p);
 				}
 			}
-		case(PieceName::Pawn):
+			break;
+		case PieceName::Pawn:
 			for (int i = 0; i < getPiece(piece.pos.x, piece.pos.y)->getMouvement().size(); i++) {
 				Pos p = getPiece(piece.pos.x, piece.pos.y)->pos + getPiece(piece.pos.x, piece.pos.y)->getMouvement()[i];
 				if (isMoveAvaliablePawn(piece.color, p, piece.pos)) {
 					piece.listMove.push_back(p);
 				}
 			}
-		case(PieceName::Knight):
+			break;
+		case PieceName::Knight:
 			for (int i = 0; i < getPiece(piece.pos.x, piece.pos.y)->getMouvement().size(); i++) {
 				Pos p = getPiece(piece.pos.x, piece.pos.y)->pos + getPiece(piece.pos.x, piece.pos.y)->getMouvement()[i];
 				if (isMoveAvaliable(piece.color, p)) {
 					piece.listMove.push_back(p);
 				}
 			}
+			break;
 		default:
 			int compteur = 0;
 			for (int i = 0; i < getPiece(piece.pos.x, piece.pos.y)->getMouvement().size(); i++) {
@@ -113,19 +116,23 @@ namespace gameManagement{
 				while (isMoveAvaliable(piece.color, po)) {
 					piece.listMove.push_back(po);
 					compteur += 1;
-					po = p + getPiece(piece.pos.x, piece.pos.y)->getMouvement()[i]*compteur;
+					po = p + getPiece(piece.pos.x, piece.pos.y)->getMouvement()[i] * compteur;
 				}
 				compteur = 0;
 			}
+			break;
 		}
 	}
 
 	bool Board::movePiece(Piece& piece, const Pos& newPos) {
-		lookAvaliableMoveForPlayer(piece);
-		if (find(piece.listMove.begin(), piece.listMove.end(), newPos) != piece.listMove.end()) {
-			chessboard[newPos.x][newPos.y].piece = move(chessboard[piece.pos.x][piece.pos.y].piece);
-			chessboard[newPos.x][newPos.y].piece->pos = newPos;
-			return true; 
+		if (turn == piece.color) {
+			lookAvaliableMoveForPlayer(piece);
+			if (find(piece.listMove.begin(), piece.listMove.end(), newPos) != piece.listMove.end()) {
+				chessboard[newPos.x][newPos.y].piece = move(chessboard[piece.pos.x][piece.pos.y].piece);
+				chessboard[newPos.x][newPos.y].piece->pos = newPos;
+				turn == Color::White ? turn = Color::Black : turn = Color::White;
+				return true; 
+			}
 		}
 		return false; 
 	}

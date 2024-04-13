@@ -5,7 +5,7 @@
 #include <QPushButton>
 #include "board.hpp" 
 
-using gameManagement::Board;
+using gameManagement::Board, gameManagement::boardSize;
 
 namespace interface {
     class MainWindow : public QMainWindow
@@ -16,7 +16,7 @@ namespace interface {
         explicit MainWindow(QWidget* parent = nullptr);
 
     private:
-        QPushButton* chessBoard[8][8]; 
+        QPushButton* chessBoard[boardSize][boardSize];
         void setupChessBoard();
         Board logic;
         optional<Pos> selectedPiecePos = std::nullopt;

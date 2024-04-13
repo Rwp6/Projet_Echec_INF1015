@@ -7,17 +7,21 @@
 #include "player.hpp"
 
 namespace gameManagement{
+	const int boardSize = 8;
+
 	class Board {
 	public:
 		Board();
 		Board(int i);
 		~Board() {};
 		Piece* getPiece(int x, int y);
+		Color turn = Color::White;
 
 		bool isMoveAvaliable(Color color, Pos pos);
 		bool isMoveAvaliablePawn(Color color, Pos pos, Pos posPawn);
 		void lookAvaliableMoveForPlayer(Piece& piece);
 		bool movePiece(Piece& piece, const Pos& newPos);
+
 
 		class PieceRAII {
 		public:
