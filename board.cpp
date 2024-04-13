@@ -130,7 +130,7 @@ namespace gameManagement{
 			if (find(piece.listMove.begin(), piece.listMove.end(), newPos) != piece.listMove.end()) {
 				chessboard[newPos.x][newPos.y].piece = move(chessboard[piece.pos.x][piece.pos.y].piece);
 				chessboard[newPos.x][newPos.y].piece->pos = newPos;
-				turn == Color::White ? turn = Color::Black : turn = Color::White;
+				turn = turn == Color::White ? Color::Black : Color::White;
 				return true; 
 			}
 		}
