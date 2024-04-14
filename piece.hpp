@@ -39,13 +39,14 @@ private:
 class King : public Piece {
 public:
 	King(Color c, Pos p);
-	~King() {};
+	~King() { compteur_ -= 1; };
 	const string getCarac() const override { return caracter; };
 	vector<Pos> getMouvement() override { return mouvement; };
 	string caracter;
 	vector<Pos> mouvement = { Pos(1,0), Pos(1,1), Pos(0,1), Pos(-1,1), Pos(-1,0), Pos(-1,-1), Pos(0,-1), Pos(1, -1) };
 	vector<Pos> listMove;
 private:
+	static int compteur_;
 };
 
 class Queen : public Piece {
@@ -107,7 +108,6 @@ public:
 	string caracter;
 	vector<Pos> mouvement;
 	vector<Pos> listMove;
-
 private:
 };
 #endif

@@ -10,7 +10,12 @@ Piece::Piece(Color c, Pos p, PieceName n) {
 const string Piece::getCarac() const { return ""; }
 vector<Pos> Piece::getMouvement() { return {}; }
 
+int King::compteur_ = 0;
 King::King(Color c, Pos p) : Piece(c, p, PieceName::King) {
+	if (compteur_ >= 2) {
+		throw std::runtime_error("Il ne peut y avoir que deux Roi sur le terrain.");
+	}
+	compteur_++;
 	if (c == Color::Black)
 		caracter = "\u2654";
 	else {
