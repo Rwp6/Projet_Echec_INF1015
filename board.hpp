@@ -14,13 +14,17 @@ namespace gameManagement{
 		Board();
 		Board(int i);
 		~Board() {};
-		Piece* getPiece(int x, int y);
+		Piece& getPiece(Pos pos);
+
 		Color turn = Color::White;
 
+		Pos lookForTheKing(Color color);
+		bool isKingChecked(Color color);
 		bool isMoveAvaliable(Color color, Pos pos);
 		bool isMoveAvaliablePawn(Color color, Pos pos, Pos posPawn);
 		void lookAvaliableMoveForPlayer(Piece& piece);
 		bool movePiece(Piece& piece, const Pos& newPos);
+		bool movePieceRAII(Piece& piece, const Pos& newPos);
 
 
 		class PieceRAII {
@@ -33,6 +37,7 @@ namespace gameManagement{
 		};
 
 		vector<vector<Case>> chessboard;
+		vector<vector<Case>> temp;
 	private:
 	};
 }
