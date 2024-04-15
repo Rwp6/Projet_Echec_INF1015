@@ -2,6 +2,10 @@
 #define COLOR_HPP
 
 enum class Color {
-	White, Black
+    White,
+    Black
 };
+
+Color operator!(Color color);
+
 #endif

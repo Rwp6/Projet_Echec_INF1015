@@ -5,7 +5,7 @@
 
 
 namespace gameManagement {
-	Board::Board() {
+	Board::Board(int i) {
 		try {
 			chessboard = vector<vector<Case>>(boardSize, vector<Case>(boardSize));
 			chessboard[7][0].piece = make_unique<Rook>(Color::White, Pos(7, 0));
@@ -20,7 +20,7 @@ namespace gameManagement {
 		}
 	}
 
-	Board::Board(int i) {
+	Board::Board() {
 		try {
 			chessboard = vector<vector<Case>>(boardSize, vector<Case>(boardSize));
 
@@ -72,7 +72,7 @@ namespace gameManagement {
 				} else if (pos - posPawn == Pos(2, 0)) {
 					return &getPiece(pos) == nullptr && posPawn.x == 1;
 				} else if (pos - posPawn == Pos(1, 1) || pos - posPawn == Pos(1, -1)) {
-					return &getPiece(pos) != nullptr && getPiece(pos).color == Color::White;
+					return &getPiece(pos) != nullptr && getPiece(pos).color == !color;
 				}
 				return false;
 			} else {
@@ -81,7 +81,7 @@ namespace gameManagement {
 				} else if (pos - posPawn == Pos(-2, 0)) {
 					return &getPiece(pos) == nullptr && posPawn.x == 6;
 				} else if (pos - posPawn == Pos(-1, 1) || pos - posPawn == Pos(-1, -1)) {
-					return &getPiece(pos) != nullptr && getPiece(pos).color == Color::Black;
+					return &getPiece(pos) != nullptr && getPiece(pos).color == !color;
 				}
 				return false;
 			}
@@ -178,7 +178,7 @@ namespace gameManagement {
 					return false;
 				}
 
-				turn = turn == Color::White ? Color::Black : Color::White;
+				turn = !turn;
 				return true;
 			}
 		}
