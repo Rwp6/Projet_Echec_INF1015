@@ -189,7 +189,7 @@ namespace gameManagement {
 	Board::PieceRAII::PieceRAII(Piece& p, const Pos& newP, Board& b)
 		: piece(p), board(b) {
 		oldPos = p.pos;
-		board.movePiece(piece, newP);
+		board.movePieceRAII(piece, newP);
 		piece.pos = newP;
 	}
 
