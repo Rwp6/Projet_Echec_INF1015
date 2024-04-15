@@ -6,7 +6,7 @@
 #include "case.hpp"
 #include "player.hpp"
 
-namespace gameManagement{
+namespace gameManagement {
 	const int boardSize = 8;
 
 	class Board {
@@ -15,9 +15,6 @@ namespace gameManagement{
 		Board(int i);
 		~Board() {};
 		Piece& getPiece(Pos pos);
-
-		Color turn = Color::White;
-
 		Pos lookForTheKing(Color color);
 		bool isKingChecked(Color color);
 		bool isMoveAvaliable(Color color, Pos pos);
@@ -25,7 +22,6 @@ namespace gameManagement{
 		void lookAvaliableMoveForPlayer(Piece& piece);
 		bool movePiece(Piece& piece, const Pos& newPos);
 		bool movePieceRAII(Piece& piece, const Pos& newPos);
-
 
 		class PieceRAII {
 		public:
@@ -36,9 +32,11 @@ namespace gameManagement{
 			Board& board;
 		};
 
+		Color turn = Color::White;
 		vector<vector<Case>> chessboard;
 		vector<vector<Case>> temp;
 	private:
 	};
 }
+
 #endif

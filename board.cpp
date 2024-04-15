@@ -120,7 +120,7 @@ namespace gameManagement {
 			}
 			break;
 		default:
-			int compteur = 0;
+			int multiplicator = 0;
 			for (int i = 0; i < getPiece(piece.pos).getMouvement().size(); i++) {
 				Pos p = getPiece(piece.pos).pos + getPiece(piece.pos).getMouvement()[i];
 				Pos po = p;
@@ -128,10 +128,10 @@ namespace gameManagement {
 					piece.listMove.push_back(po);
 					if (&getPiece(po) != nullptr)
 						break;
-					compteur += 1;
-					po = p + getPiece(piece.pos).getMouvement()[i] * compteur;
+					multiplicator += 1;
+					po = p + getPiece(piece.pos).getMouvement()[i] * multiplicator;
 				}
-				compteur = 0;
+				multiplicator = 0;
 			}
 			break;
 		}
@@ -140,7 +140,7 @@ namespace gameManagement {
 	Pos Board::lookForTheKing(Color color) {
 		for (int i = 0; i < boardSize; i++) {
 			for (int j = 0; j < boardSize; j++) {
-				if (&getPiece(Pos(i,j)) != nullptr && getPiece(Pos(i,j)).name == PieceName::King && getPiece(Pos(i,j)).color == color)
+				if (&getPiece(Pos(i, j)) != nullptr && getPiece(Pos(i, j)).name == PieceName::King && getPiece(Pos(i, j)).color == color)
 					return Pos(i, j);
 			}
 		}
@@ -151,9 +151,9 @@ namespace gameManagement {
 		vector<Pos> controledCaseByEnnemy = {};
 		for (int i = 0; i < boardSize; i++) {
 			for (int j = 0; j < boardSize; j++) {
-				if (&getPiece(Pos(i, j)) != nullptr && getPiece(Pos(i, j)).color != color){
+				if (&getPiece(Pos(i, j)) != nullptr && getPiece(Pos(i, j)).color != color) {
 					lookAvaliableMoveForPlayer(getPiece(Pos(i, j)));
-					controledCaseByEnnemy.insert(controledCaseByEnnemy.end(), getPiece(Pos(i,j)).listMove.begin(), getPiece(Pos(i, j)).listMove.end());
+					controledCaseByEnnemy.insert(controledCaseByEnnemy.end(), getPiece(Pos(i, j)).listMove.begin(), getPiece(Pos(i, j)).listMove.end());
 				}
 			}
 		}
@@ -170,8 +170,8 @@ namespace gameManagement {
 
 				chessboard[newPos.x][newPos.y].piece = move(chessboard[piece.pos.x][piece.pos.y].piece);
 				chessboard[newPos.x][newPos.y].piece->pos = newPos;
-				
-				
+
+
 				if (isKingChecked(piece.color)) {
 					chessboard[oldPos.x][oldPos.y].piece = move(chessboard[piece.pos.x][piece.pos.y].piece);
 					chessboard[oldPos.x][oldPos.y].piece->pos = oldPos;
@@ -184,7 +184,6 @@ namespace gameManagement {
 		}
 		return false;
 	}
-
 
 	Board::PieceRAII::PieceRAII(Piece& p, const Pos& newP, Board& b)
 		: piece(p), board(b) {
@@ -202,6 +201,7 @@ namespace gameManagement {
 		if (find(piece.listMove.begin(), piece.listMove.end(), newPos) != piece.listMove.end()) {
 			chessboard[newPos.x][newPos.y].piece = move(chessboard[piece.pos.x][piece.pos.y].piece);
 			chessboard[newPos.x][newPos.y].piece->pos = newPos;
+			return true;
 		}
 		return false;
 	}

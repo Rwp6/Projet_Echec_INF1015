@@ -13,11 +13,10 @@ public:
 	Case& operator=(const Case& other);
 	Case(const Case& other) { *this = other; };
 
-
 	Color color;
 	unique_ptr<Piece> piece = nullptr;
 	Pos pos;
 private:
-
 };
+
 #endif

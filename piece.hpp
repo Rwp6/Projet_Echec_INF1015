@@ -24,17 +24,15 @@ public:
 	Piece() {};
 	Piece(Color c, Pos p, PieceName n);
 	virtual ~Piece() {};
+	virtual const string getCarac() const;
+	virtual vector<Pos> getMouvement();
+
 	Color color;
 	Pos pos;
 	PieceName name;
-	virtual const string getCarac() const;
-	virtual vector<Pos> getMouvement();
 	vector<Pos> listMove = {};
 private:
 };
-
-
-
 
 class King : public Piece {
 public:
@@ -70,7 +68,6 @@ public:
 	string caracter;
 	vector<Pos> mouvement = { Pos(1,0), Pos(0,1), Pos(-1,0), Pos(0,-1) };
 	vector<Pos> listMove;
-
 private:
 };
 
@@ -83,7 +80,6 @@ public:
 	string caracter;
 	vector<Pos> mouvement = { Pos(1,1), Pos(-1,1), Pos(-1,-1), Pos(1,-1) };
 	vector<Pos> listMove;
-
 private:
 };
 
@@ -110,4 +106,5 @@ public:
 	vector<Pos> listMove;
 private:
 };
+
 #endif
