@@ -5,7 +5,7 @@
 
 
 namespace gameManagement {
-	Board::Board(int i) {
+	Board::Board() {
 		try {
 			chessboard = vector<vector<Case>>(boardSize, vector<Case>(boardSize));
 			chessboard[7][0].piece = make_unique<Rook>(Color::White, Pos(7, 0));
@@ -20,7 +20,7 @@ namespace gameManagement {
 		}
 	}
 
-	Board::Board() {
+	Board::Board(int i) {
 		try {
 			chessboard = vector<vector<Case>>(boardSize, vector<Case>(boardSize));
 
