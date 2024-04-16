@@ -9,10 +9,15 @@
 namespace gameManagement {
 	const int boardSize = 8;
 
+	enum class Situation {
+		Beggining,
+		QueenRookCheckmate,
+		QueenVSRook
+	};
+
 	class Board {
 	public:
-		Board();
-		Board(int i);
+		Board(Situation s);
 		~Board() {};
 		Piece& getPiece(Pos pos);
 		Pos lookForTheKing(Color color);

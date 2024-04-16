@@ -5,7 +5,7 @@
 #include <QPushButton>
 #include "board.hpp" 
 
-using gameManagement::Board, gameManagement::boardSize;
+using gameManagement::Board, gameManagement::boardSize, gameManagement::Situation;
 
 namespace interface {
     class MainWindow : public QMainWindow
@@ -18,11 +18,11 @@ namespace interface {
     private:
         QPushButton* chessBoard[boardSize][boardSize];
         void setupChessBoard();
-        Board logic;
-        optional<Pos> selectedPiecePos = std::nullopt;
+        Board logic = Board(Situation::Beggining);
+        optional<Pos> selectedPiecePos = nullopt;
         void handleChessSquareClicked(int row, int col);
         void updateChessBoardUI();
         void updateChessSquareColor(int row, int col);
     };
-    #endif // MAINWINDOW_H
+    #endif
 };

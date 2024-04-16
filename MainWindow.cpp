@@ -11,8 +11,6 @@ namespace interface {
         QWidget* centralWidget = new QWidget(this);
         QGridLayout* layout = new QGridLayout;
 
-
-
         setupChessBoard();
 
         for (int row = 0; row < 8; ++row) {
@@ -27,7 +25,6 @@ namespace interface {
     }
 
     void MainWindow::setupChessBoard() {
-
 
         QColor light("#6C6C6C");
         QColor dark("#292626");
@@ -77,11 +74,11 @@ namespace interface {
                     QTimer::singleShot(1000, [this, row, col]() { updateChessSquareColor(row, col); });
                 }
                 updateChessSquareColor(selectedPiecePos->x, selectedPiecePos->y);
-                selectedPiecePos = std::nullopt;
+                selectedPiecePos = nullopt;
                 updateChessBoardUI();
             } else {
                 updateChessSquareColor(row, col);
-                selectedPiecePos = std::nullopt;
+                selectedPiecePos = nullopt;
             }
         }
     }
