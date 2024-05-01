@@ -18,7 +18,7 @@ namespace interface {
     private:
         QPushButton* chessBoard[boardSize][boardSize];
         void setupChessBoard();
-        Board logic = Board(Situation::Beggining);
+        Board logic = Board(Situation::Test);
         optional<Pos> selectedPiecePos = nullopt;
         void handleChessSquareClicked(int row, int col);
         void updateChessBoardUI();

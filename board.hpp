@@ -12,7 +12,8 @@ namespace gameManagement {
 	enum class Situation {
 		Beggining,
 		QueenRookCheckmate,
-		QueenVSRook
+		QueenVSRook,
+		Test,
 	};
 
 	class Board {

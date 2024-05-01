@@ -54,6 +54,19 @@ namespace gameManagement {
 				chessboard[2][1].piece = make_unique<Rook>(Color::Black, Pos(2, 1));
 				chessboard[0][3].piece = make_unique<King>(Color::Black, Pos(0, 3));
 				break;
+			case gameManagement::Situation::Test:
+				chessboard[7][0].piece = make_unique<Rook>(Color::White, Pos(7, 0));
+				chessboard[7][1].piece = make_unique<Knight>(Color::White, Pos(7, 1));
+				chessboard[7][2].piece = make_unique<Bishop>(Color::White, Pos(7, 2));
+				chessboard[7][3].piece = make_unique<Queen>(Color::White, Pos(7, 3));
+				chessboard[6][5].piece = make_unique<Pawn>(Color::White, Pos(6, 5));
+
+				chessboard[0][0].piece = make_unique<Rook>(Color::Black, Pos(0, 0));
+				chessboard[0][1].piece = make_unique<Knight>(Color::Black, Pos(0, 1));
+				chessboard[0][2].piece = make_unique<Bishop>(Color::Black, Pos(0, 2));
+				chessboard[0][3].piece = make_unique<Queen>(Color::Black, Pos(0, 3));
+				chessboard[0][4].piece = make_unique<King>(Color::Black, Pos(0, 4));
+				chessboard[1][5].piece = make_unique<Pawn>(Color::Black, Pos(1, 5));
 			default:
 				break;
 			}
