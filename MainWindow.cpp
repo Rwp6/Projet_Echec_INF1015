@@ -2,7 +2,8 @@
 #include <QGridLayout>
 #include <QWidget>
 #include <QTimer>
-
+#include <QLabel>
+#include <QFont> 
 
 using gameManagement::Board;
 
@@ -18,10 +19,18 @@ namespace interface {
                 layout->addWidget(chessBoard[row][col], row, col);
             }
         }
+        playerTurnLabel = new QLabel("Tour des blancs", this);  // Initialiser avec le texte par défaut
+        playerTurnLabel->setWordWrap(true);
+        QFont labelFont("Arial", 24);
+        playerTurnLabel->setFont(labelFont);
+        layout->addWidget(playerTurnLabel, 0, 8, 8, 2);
+
+
         layout->setRowStretch(8, 1);
         layout->setColumnStretch(8, 1);
         centralWidget->setLayout(layout);
         setCentralWidget(centralWidget);
+
     }
 
     void MainWindow::setupChessBoard() {
@@ -66,22 +75,28 @@ namespace interface {
                 selectedPiecePos = Pos(row, col);
                 chessBoard[row][col]->setStyleSheet("background-color: #FFD700;");
             }
-        } else {
+        }
+        else {
             if (selectedPiecePos->x != row || selectedPiecePos->y != col) {
                 bool moveSuccessful = logic.movePiece(*(logic.chessboard[selectedPiecePos->x][selectedPiecePos->y].piece), Pos(row, col));
-                if (!moveSuccessful) {
+                if (moveSuccessful) {
+                    updateChessSquareColor(selectedPiecePos->x, selectedPiecePos->y);
+                    selectedPiecePos = nullopt;
+                    updateChessBoardUI();
+                    updateTurnLabel();  
+                }
+                else {
                     chessBoard[row][col]->setStyleSheet("background-color: red;");
                     QTimer::singleShot(1000, [this, row, col]() { updateChessSquareColor(row, col); });
                 }
-                updateChessSquareColor(selectedPiecePos->x, selectedPiecePos->y);
-                selectedPiecePos = nullopt;
-                updateChessBoardUI();
-            } else {
+            }
+            else {
                 updateChessSquareColor(row, col);
                 selectedPiecePos = nullopt;
             }
         }
     }
+
 
     void MainWindow::updateChessSquareColor(int row, int col) {
         QColor light("#6C6C6C");
@@ -103,6 +118,14 @@ namespace interface {
                 }
 
             }
+        }
+    }
+    void MainWindow::updateTurnLabel() {
+        if (logic.isWhiteTurn()) {
+            playerTurnLabel->setText("Tour des blancs");
+        }
+        else {
+            playerTurnLabel->setText("Tour des noirs");
         }
     }
 };

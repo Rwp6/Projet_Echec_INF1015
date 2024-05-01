@@ -224,5 +224,8 @@ namespace gameManagement {
 		}
 		return false;
 	}
+	bool Board::isWhiteTurn() const {
+		return turn == Color::White;
+	}
 }
 

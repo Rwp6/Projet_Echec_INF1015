@@ -28,6 +28,7 @@ namespace gameManagement {
 		void lookAvaliableMoveForPlayer(Piece& piece);
 		bool movePiece(Piece& piece, const Pos& newPos);
 		bool movePieceRAII(Piece& piece, const Pos& newPos);
+		bool isWhiteTurn() const;
 
 		class PieceRAII {
 		public:
