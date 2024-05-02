@@ -1,3 +1,11 @@
+/**
+* Classe Board qui contient les cases, déplace les pièces et s'occupe de la gestion des tours et de la mise en échec
+* \file   board.hpp
+* \author Rayan Asma et Rosalie Lamoureux
+* \date   3 mars 2024
+* Cree le 8 avril 2024
+*/
+
 #ifndef BARD_HPP
 #define BOARD_HPP
 

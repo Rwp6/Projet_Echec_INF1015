@@ -1,3 +1,11 @@
+/**
+* Implémentation de la classe Board crée dans board.hpp
+* \file   board.cpp
+* \author Rayan Asma et Rosalie Lamoureux
+* \date   3 mars 2024
+* Cree le 8 avril 2024
+*/
+
 #include "board.hpp"
 #include <memory>
 #include <iostream>
@@ -67,6 +75,7 @@ namespace gameManagement {
 				chessboard[0][3].piece = make_unique<Queen>(Color::Black, Pos(0, 3));
 				chessboard[0][4].piece = make_unique<King>(Color::Black, Pos(0, 4));
 				chessboard[1][5].piece = make_unique<Pawn>(Color::Black, Pos(1, 5));
+				chessboard[2][0].piece = make_unique<Pawn>(Color::Black, Pos(2, 0));
 			default:
 				break;
 			}
@@ -93,7 +102,6 @@ namespace gameManagement {
 				} else if (pos - posPawn == Pos(1, 1) || pos - posPawn == Pos(1, -1)) {
 					return &getPiece(pos) != nullptr && getPiece(pos).color == !color;
 				}
-				return false;
 			} else {
 				if (pos - posPawn == Pos(-1, 0)) {
 					return &getPiece(pos) == nullptr;
@@ -102,9 +110,9 @@ namespace gameManagement {
 				} else if (pos - posPawn == Pos(-1, 1) || pos - posPawn == Pos(-1, -1)) {
 					return &getPiece(pos) != nullptr && getPiece(pos).color == !color;
 				}
-				return false;
 			}
 		}
+		return false;
 	}
 
 	Piece& Board::getPiece(Pos pos) {
@@ -115,6 +123,7 @@ namespace gameManagement {
 		piece.listMove = {};
 		switch (getPiece(piece.pos).name) {
 		case PieceName::King:
+		case PieceName::Knight:
 			for (int i = 0; i < getPiece(piece.pos).getMouvement().size(); i++) {
 				Pos p = getPiece(piece.pos).pos + getPiece(piece.pos).getMouvement()[i];
 				if (isMoveAvaliable(piece.color, p)) {
@@ -126,14 +135,6 @@ namespace gameManagement {
 			for (int i = 0; i < getPiece(piece.pos).getMouvement().size(); i++) {
 				Pos p = getPiece(piece.pos).pos + getPiece(piece.pos).getMouvement()[i];
 				if (isMoveAvaliablePawn(piece.color, p, piece.pos)) {
-					piece.listMove.push_back(p);
-				}
-			}
-			break;
-		case PieceName::Knight:
-			for (int i = 0; i < getPiece(piece.pos).getMouvement().size(); i++) {
-				Pos p = getPiece(piece.pos).pos + getPiece(piece.pos).getMouvement()[i];
-				if (isMoveAvaliable(piece.color, p)) {
 					piece.listMove.push_back(p);
 				}
 			}
@@ -224,6 +225,7 @@ namespace gameManagement {
 		}
 		return false;
 	}
+
 	bool Board::isWhiteTurn() const {
 		return turn == Color::White;
 	}

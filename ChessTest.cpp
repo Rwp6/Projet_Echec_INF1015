@@ -1,3 +1,11 @@
+/**
+* Tests unitaires qui vérifient que les mouvements des pièces sont valides, permet en un coup d'oeil de vérifier après un changement que le jeu marche toujours.
+* \file   ChessTest.hpp
+* \author Rayan Asma et Rosalie Lamoureux
+* \date   3 mars 2024
+* Cree le 8 avril 2024
+*/
+
 #include "board.hpp"
 
 #if __has_include("gtest/gtest.h")
@@ -6,6 +14,14 @@
 #ifdef TEST
 
 using namespace gameManagement;
+
+TEST(Board, deplacement_pas_possible_hors_limite_piece_blanche) {
+	Board b = Board(Situation::Test);
+	Piece* pieceBeforeMove = &b.getPiece(Pos(7, 3));
+	b.movePiece(*pieceBeforeMove, Pos(7, 8));
+
+	EXPECT_EQ(pieceBeforeMove, pieceBeforeMove);
+}
 
 TEST(Board, deplacement_tour_blanc_au_debut) {
 	Board b = Board(Situation::Test);
@@ -69,5 +85,31 @@ TEST(Board, mise_en_echec_deplacement_limite_pour_roi_noir) {
 
 	EXPECT_EQ(pieceBeforeMove, pieceBeforeMove);
 }
+
+TEST(Board, tour_blanc_mange_pion_noir_debut) {
+	Board b = Board(Situation::Test);
+	Piece* pieceBeforeMove = &b.getPiece(Pos(7, 0));
+	b.movePiece(*pieceBeforeMove, Pos(2, 0));
+	Piece* pieceAfterMove = &b.getPiece(Pos(2, 0));
+
+	EXPECT_EQ(pieceAfterMove, pieceBeforeMove);
+}
+
+TEST(Board, deplacement_tour_blanc_derriere_pion_blanc_pas_possible) {
+	Board b = Board(Situation::Test);
+	Piece* pieceBeforeMove = &b.getPiece(Pos(7, 0));
+	b.movePiece(*pieceBeforeMove, Pos(1, 0));
+
+	EXPECT_EQ(pieceBeforeMove, pieceBeforeMove);
+}
+
+TEST(Board, deplacement_tour_blanc_sur_cavalier_blanc_pas_possible) {
+	Board b = Board(Situation::Test);
+	Piece* pieceBeforeMove = &b.getPiece(Pos(7, 0));
+	b.movePiece(*pieceBeforeMove, Pos(7, 1));
+
+	EXPECT_EQ(pieceBeforeMove, pieceBeforeMove);
+}
+
 
 #endif

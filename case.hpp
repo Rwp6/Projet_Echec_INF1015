@@ -1,3 +1,11 @@
+/**
+* Classe Board qui contient ou non une pièce
+* \file   case.hpp
+* \author Rayan Asma et Rosalie Lamoureux
+* \date   3 mars 2024
+* Cree le 8 avril 2024
+*/
+
 #ifndef CASE_HPP
 #define CASE_HPP
 

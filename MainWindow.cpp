@@ -19,11 +19,12 @@ namespace interface {
                 layout->addWidget(chessBoard[row][col], row, col);
             }
         }
-        playerTurnLabel = new QLabel("Tour des blancs", this);  // Initialiser avec le texte par défaut
+        playerTurnLabel = new QLabel("Tour: Blancs", this);  // Initialiser avec le texte par défaut
         playerTurnLabel->setWordWrap(true);
         QFont labelFont("Arial", 24);
         playerTurnLabel->setFont(labelFont);
-        layout->addWidget(playerTurnLabel, 0, 8, 8, 2);
+        playerTurnLabel->setAlignment(Qt::AlignCenter);
+        layout->addWidget(playerTurnLabel, 9, 2, 8, 4);
 
 
         layout->setRowStretch(8, 1);
@@ -121,11 +122,6 @@ namespace interface {
         }
     }
     void MainWindow::updateTurnLabel() {
-        if (logic.isWhiteTurn()) {
-            playerTurnLabel->setText("Tour des blancs");
-        }
-        else {
-            playerTurnLabel->setText("Tour des noirs");
-        }
+        logic.isWhiteTurn() ? playerTurnLabel->setText("Tour: Blancs"): playerTurnLabel->setText("Tour: Noirs");
     }
 };

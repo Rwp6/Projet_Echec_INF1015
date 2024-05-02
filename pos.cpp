@@ -1,3 +1,11 @@
+/**
+* Implémentation de la class Pos crée dans pos.hpp
+* \file   pos.cpp
+* \author Rayan Asma et Rosalie Lamoureux
+* \date   3 mars 2024
+* Cree le 8 avril 2024
+*/
+
 #include "pos.hpp"
 
 Pos::Pos(int ligne, int colonne) {

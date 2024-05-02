@@ -1,8 +1,13 @@
+/**
+* Implémentation de la enum-class Color crée dans color.hpp
+* \file   color.cpp
+* \author Rayan Asma et Rosalie Lamoureux
+* \date   3 mars 2024
+* Cree le 8 avril 2024
+*/
+
 #include "color.hpp"
 
 Color operator!(Color color) {
-	if (color == Color::Black)
-		return Color::White;
-	else
-		return Color::Black;
+	return color == Color::Black ? Color::White : Color::Black;
 }
