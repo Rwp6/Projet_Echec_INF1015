@@ -27,7 +27,6 @@ namespace gameManagement {
 	class Board {
 	public:
 		Board(Situation s);
-		~Board() {};
 		Piece& getPiece(Pos pos);
 		Pos lookForTheKing(Color color);
 		bool isKingChecked(Color color);

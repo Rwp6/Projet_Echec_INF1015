@@ -13,7 +13,6 @@ class Pos {
 public:
 	Pos() {};
 	Pos(int ligne, int colonne);
-	~Pos() {};
 	Pos operator+(const Pos other) const;
 	Pos operator-(const Pos other) const;
 	Pos operator*(const int i) const;

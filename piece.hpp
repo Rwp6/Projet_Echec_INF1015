@@ -9,9 +9,9 @@
 #ifndef PIECE_HPP
 #define PIECE_HPP
 
-#include "color.hpp"
 #include <vector>
 #include <string>
+#include "color.hpp"
 #include "pos.hpp"
 
 using namespace std;
@@ -28,8 +28,7 @@ enum class PieceName {
 
 class Piece {
 public:
-	Piece() {};
-	Piece(Color c, Pos p, PieceName n);
+	Piece(Color c, Pos p);
 	virtual ~Piece() {};
 	const string getCarac() const { return character_; };
 	vector<Pos> getMouvement() { return mouvement_; };

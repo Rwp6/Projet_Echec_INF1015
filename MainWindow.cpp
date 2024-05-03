@@ -1,5 +1,5 @@
 /**
-* Implémentation de la class  MainWindow crée dans  MainWindow.hpp
+* Implémentation de la class MainWindow crée dans MainWindow.hpp
 * \file   MainWindow.cpp
 * \author Rayan Asma et Rosalie Lamoureux
 * \date   3 mai 2024
@@ -7,13 +7,13 @@
 */
 
 
-#include "MainWindow.hpp"
 #include <QGridLayout>
 #include <QWidget>
 #include <QTimer>
 #include <QLabel>
 #include <QPushButton>
 #include <QFont>
+#include "MainWindow.hpp"
 
 using gameManagement::Board;
 
@@ -37,14 +37,22 @@ namespace interface {
 
 
         QLabel* additionalInfoLabel = new QLabel("Par: Rayan Asma et Rosalie Lamoureux", this);
-        additionalInfoLabel->setFont(QFont("Arial", 12));
+        additionalInfoLabel->setFont(QFont("Arial", 13));
         additionalInfoLabel->setAlignment(Qt::AlignCenter);
-        additionalInfoLabel->setStyleSheet("color: red;");
 
 
-        QPushButton* button1 = new QPushButton("Position initiale", this);
-        QPushButton* button2 = new QPushButton("Mat Roi-Reine", this);
+        QPushButton* button1 = new QPushButton("Debut partie", this);
+        QPushButton* button2 = new QPushButton("Mat Tour-Reine", this);
         QPushButton* button3 = new QPushButton("Reine vs Tour", this);
+
+        button1->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        button1->setFixedSize(100, 30); 
+
+        button2->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        button2->setFixedSize(100, 30);
+
+        button3->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        button3->setFixedSize(100, 30); 
 
 
         QHBoxLayout* bottomLayout = new QHBoxLayout;
@@ -132,7 +140,6 @@ namespace interface {
         }
     }
 
-
     void MainWindow::updateChessSquareColor(int row, int col) {
         QColor light("#6C6C6C");
         QColor dark("#292626");
@@ -140,7 +147,7 @@ namespace interface {
         chessBoard[row][col]->setStyleSheet(QString("background-color: %1;").arg(color.name()));
     }
 
-   void MainWindow::updateChessBoardUI() {
+    void MainWindow::updateChessBoardUI() {
         for (int row = 0; row < 8; ++row) {
             for (int col = 0; col < 8; ++col) {
                 auto& piece = logic.chessboard[row][col].piece;
@@ -155,10 +162,10 @@ namespace interface {
             }
         }
     }
+
     void MainWindow::updateTurnLabel() {
         logic.isWhiteTurn() ? playerTurnLabel->setText("Tour: Blancs"): playerTurnLabel->setText("Tour: Noirs");
     }
-
 
     void MainWindow::setStartingPosition() {
         logic = Board(Situation::Beggining);

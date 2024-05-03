@@ -1,6 +1,3 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
-
 /**
 * Classe MainWindow qui s'occupe de l'affichage avec QT
 * \file   MainWindow.hpp
@@ -8,6 +5,8 @@
 * \date   3 mai 2024
 * Cree le 8 avril 2024
 */
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
 #include <QMainWindow>
 #include <QPushButton>

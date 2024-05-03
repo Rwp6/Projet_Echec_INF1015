@@ -65,8 +65,9 @@ TEST(Board, deplacement_pion_blanc_2_cases_pas_possible) {
 	b.movePiece(b.getPiece(Pos(1, 5)), Pos(2, 5));
 	Piece* pieceBeforeMove = &b.getPiece(Pos(5, 5));
 	b.movePiece(*pieceBeforeMove, Pos(3, 5));
+	Piece* pieceAfterMove = &b.getPiece(Pos(5, 5));
 
-	EXPECT_EQ(pieceBeforeMove, pieceBeforeMove);
+	EXPECT_EQ(pieceAfterMove, pieceBeforeMove);
 }
 
 TEST(Board, pas_deplacement_piece_noir_au_debut) {
@@ -82,8 +83,9 @@ TEST(Board, mise_en_echec_deplacement_limite_pour_roi_noir) {
 	b.movePiece(b.getPiece(Pos(7,3)), Pos(7, 4));
 	Piece* pieceBeforeMove = &b.getPiece(Pos(0, 4));
 	b.movePiece(*pieceBeforeMove, Pos(1, 4));
+	Piece* pieceAfterMove = &b.getPiece(Pos(0, 4));
 
-	EXPECT_EQ(pieceBeforeMove, pieceBeforeMove);
+	EXPECT_EQ(pieceAfterMove, pieceBeforeMove);
 }
 
 TEST(Board, tour_blanc_mange_pion_noir_debut) {
@@ -99,17 +101,37 @@ TEST(Board, deplacement_tour_blanc_derriere_pion_blanc_pas_possible) {
 	Board b = Board(Situation::Test);
 	Piece* pieceBeforeMove = &b.getPiece(Pos(7, 0));
 	b.movePiece(*pieceBeforeMove, Pos(1, 0));
+	Piece* pieceAfterMove = &b.getPiece(Pos(7, 0));
 
-	EXPECT_EQ(pieceBeforeMove, pieceBeforeMove);
+	EXPECT_EQ(pieceAfterMove, pieceBeforeMove);
 }
 
 TEST(Board, deplacement_tour_blanc_sur_cavalier_blanc_pas_possible) {
 	Board b = Board(Situation::Test);
 	Piece* pieceBeforeMove = &b.getPiece(Pos(7, 0));
 	b.movePiece(*pieceBeforeMove, Pos(7, 1));
+	Piece* pieceAfterMove = &b.getPiece(Pos(7, 0));
 
-	EXPECT_EQ(pieceBeforeMove, pieceBeforeMove);
+	EXPECT_EQ(pieceAfterMove, pieceBeforeMove);
 }
 
+TEST(Board, deplacement_tour_blanc_PieceRAII) {
+	Board b = Board(Situation::Test);
+	Piece* pieceBeforeMove = &b.getPiece(Pos(7, 0));
+	Board::PieceRAII p(b.getPiece(Pos(7,0)), Pos(5, 0), b);
+	Piece* pieceAfterMove = &p.piece;
+
+	EXPECT_EQ(pieceAfterMove, pieceBeforeMove);
+}
+
+TEST(Board, destruction_tour_blanc_PieceRAII) {
+	Board b = Board(Situation::Test);
+	Piece* pieceBeforeMove = &b.getPiece(Pos(7, 0));
+	Board::PieceRAII p(b.getPiece(Pos(7, 0)), Pos(5, 0), b);
+	p.Board::PieceRAII::~PieceRAII();
+	Piece* pieceAfterMove = &p.piece;
+
+	EXPECT_EQ(pieceAfterMove, pieceBeforeMove);
+}
 
 #endif

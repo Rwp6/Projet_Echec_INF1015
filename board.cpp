@@ -6,10 +6,10 @@
 * Cree le 8 avril 2024
 */
 
-#include "board.hpp"
-#include <memory>
 #include <iostream>
 #include <algorithm>
+#include <memory>
+#include "board.hpp"
 
 
 namespace gameManagement {
@@ -54,7 +54,6 @@ namespace gameManagement {
 				chessboard[7][3].piece = make_unique<Queen>(Color::White, Pos(7, 3));
 
 				chessboard[0][4].piece = make_unique<King>(Color::Black, Pos(0, 4));
-				chessboard[0][5].piece = make_unique<King>(Color::Black, Pos(0, 5));
 				break;
 			case gameManagement::Situation::QueenVSRook:
 				chessboard[1][5].piece = make_unique<Queen>(Color::White, Pos(1, 5));
@@ -216,7 +215,8 @@ namespace gameManagement {
 	}
 
 	Board::PieceRAII::~PieceRAII() {
-		board.movePieceRAII(piece, oldPos);
+		board.chessboard[oldPos.x][oldPos.y].piece = move(board.chessboard[piece.pos.x][piece.pos.y].piece);
+		board.chessboard[oldPos.x][oldPos.y].piece->pos = oldPos;
 	}
 
 	bool Board::movePieceRAII(Piece& piece, const Pos& finalPos) {

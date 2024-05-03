@@ -1,5 +1,5 @@
 /**
-* Implémentation de la enum-class Color crée dans color.hpp
+* Implémentation de l'enum-class Color crée dans color.hpp
 * \file   color.cpp
 * \author Rayan Asma et Rosalie Lamoureux
 * \date   3 mai 2024
