@@ -42,3 +42,59 @@ int main(int argc, char* argv[]) {
 
 	return app.exec(); 
 }
+
+
+//#include <iostream>
+//#include "board.hpp"
+//#include "piece.hpp"
+//#include "pos.hpp"
+//#include "color.hpp"
+//#include "case.hpp"
+//
+//using namespace gameManagement;
+//using gameManagement::Board;
+//
+//ostream& operator<< (ostream& o, const Piece& piece) {
+//	string c;
+//	string n;
+//	piece.color == Color::White ? c = "White" : c = "Black";
+//	if (piece.name == PieceName::Rook)
+//		n = "Rook";
+//	else if (piece.name == PieceName::Bishop)
+//		n = "Bishop";
+//	else if (piece.name == PieceName::Queen)
+//		n = "Queen";
+//	else if (piece.name == PieceName::King)
+//		n = "King";
+//	else if (piece.name == PieceName::Knight)
+//		n = "Knight";
+//	else
+//		n = "Pawn";
+//
+//	return o << n << " | " << piece.getCarac() << " | " << c << " | " << "(" << piece.pos.x << "," << piece.pos.y << ")" << " | " << endl;
+//}
+//
+//ostream& operator<< (ostream& o, const Board& board) {
+//	string boardToPrint;
+//	for (int i = 0; i < 8; i++) {
+//		boardToPrint += "|";
+//		for (int j = 0; j < 8; j++) {
+//			if (board.chessboard[i][j].piece != nullptr) {
+//				boardToPrint += (board.chessboard[i][j].piece)->getCarac();
+//				boardToPrint += " ";
+//			} else {
+//				boardToPrint += "  ";
+//			}
+//		}
+//		boardToPrint += "|";
+//		boardToPrint +=   "\n";
+//	}
+//	return o << boardToPrint << " ----------------" << endl;
+//}
+//
+//int main() {
+//	Board b = Board(Situation::Beggining);
+//	cout << b;
+//	b = Board(Situation::Test);
+//	cout << b;
+//}

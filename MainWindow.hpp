@@ -19,7 +19,7 @@ namespace interface {
         QPushButton* chessBoard[boardSize][boardSize];
         QLabel* playerTurnLabel;  // Ajouter ce membre pour le label du tour
         void setupChessBoard();
-        Board logic = Board(Situation::Test);
+        Board logic = Board(Situation::Beggining);
         optional<Pos> selectedPiecePos = nullopt;
         void handleChessSquareClicked(int row, int col);
         void updateChessBoardUI();

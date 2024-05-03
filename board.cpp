@@ -16,6 +16,7 @@ namespace gameManagement {
 	Board::Board(Situation s) {
 		try {
 			chessboard = vector<vector<Case>>(boardSize, vector<Case>(boardSize));
+			King::deleteAllKings();
 			switch (s) {
 			case gameManagement::Situation::Beggining:
 				chessboard[7][0].piece = make_unique<Rook>(Color::White, Pos(7, 0));

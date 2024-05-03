@@ -47,6 +47,7 @@ class King : public Piece {
 public:
 	King(Color c, Pos p);
 	~King() { compteur_ -= 1; };
+	static void deleteAllKings();
 private:
 	static int compteur_;
 };

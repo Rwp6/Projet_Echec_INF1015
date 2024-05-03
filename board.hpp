@@ -12,6 +12,7 @@
 #include <vector>
 #include "color.hpp"
 #include "case.hpp"
+#include "piece.hpp"
 
 namespace gameManagement {
 	const int boardSize = 8;

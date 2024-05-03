@@ -16,6 +16,7 @@ Piece::Piece(Color c, Pos p, PieceName n) {
 }
 
 int King::compteur_ = 0;
+
 King::King(Color c, Pos p) : Piece(c, p, PieceName::King) {
 	if (compteur_ >= 2) {
 		throw std::runtime_error("Il ne peut y avoir que deux Roi sur le terrain.");
@@ -23,6 +24,10 @@ King::King(Color c, Pos p) : Piece(c, p, PieceName::King) {
 	compteur_++;
 	character_ = c == Color::Black ? "\u2654" : "\u2654";
 	mouvement_ = { Pos(1,0), Pos(1,1), Pos(0,1), Pos(-1,1), Pos(-1,0), Pos(-1,-1), Pos(0,-1), Pos(1, -1) };
+}
+
+void King::deleteAllKings() {
+	compteur_ = 0;
 }
 
 Queen::Queen(Color c, Pos p) : Piece(c, p, PieceName::Queen) {
