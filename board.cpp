@@ -13,11 +13,11 @@
 
 
 namespace gameManagement {
-	Board::Board(Situation s) {
+	Board::Board(Situation situation) {
 		try {
 			chessboard = vector<vector<Case>>(boardSize, vector<Case>(boardSize));
 			King::deleteAllKings();
-			switch (s) {
+			switch (situation) {
 			case gameManagement::Situation::Beggining:
 				chessboard[7][0].piece = make_unique<Rook>(Color::White, Pos(7, 0));
 				chessboard[7][1].piece = make_unique<Knight>(Color::White, Pos(7, 1));
@@ -182,20 +182,22 @@ namespace gameManagement {
 	}
 
 
-	bool Board::movePiece(Piece& piece, const Pos& newPos) {
+	bool Board::movePiece(Piece& piece, const Pos& finalPos) {
 		if (turn == piece.color) {
 			lookAvaliableMoveForPlayer(piece);
-			if (find(piece.listMove.begin(), piece.listMove.end(), newPos) != piece.listMove.end()) {
+			if (find(piece.listMove.begin(), piece.listMove.end(), finalPos) != piece.listMove.end()) {
 
 				Pos oldPos = piece.pos;
+				unique_ptr<Piece> oldPiece = move(chessboard[finalPos.x][finalPos.y].piece);
 
-				chessboard[newPos.x][newPos.y].piece = move(chessboard[piece.pos.x][piece.pos.y].piece);
-				chessboard[newPos.x][newPos.y].piece->pos = newPos;
-
+				chessboard[finalPos.x][finalPos.y].piece = move(chessboard[piece.pos.x][piece.pos.y].piece);
+				chessboard[finalPos.x][finalPos.y].piece->pos = finalPos;
 
 				if (isKingChecked(piece.color)) {
 					chessboard[oldPos.x][oldPos.y].piece = move(chessboard[piece.pos.x][piece.pos.y].piece);
 					chessboard[oldPos.x][oldPos.y].piece->pos = oldPos;
+
+					chessboard[finalPos.x][finalPos.y].piece = move(oldPiece);
 					return false;
 				}
 
@@ -206,22 +208,22 @@ namespace gameManagement {
 		return false;
 	}
 
-	Board::PieceRAII::PieceRAII(Piece& p, const Pos& newP, Board& b)
-		: piece(p), board(b) {
-		oldPos = p.pos;
-		board.movePieceRAII(piece, newP);
-		piece.pos = newP;
+	Board::PieceRAII::PieceRAII(Piece& piece, const Pos& finalPos, Board& board)
+		: piece(piece), board(board) {
+		oldPos = piece.pos;
+		board.movePieceRAII(piece, finalPos);
+		piece.pos = finalPos;
 	}
 
 	Board::PieceRAII::~PieceRAII() {
 		board.movePieceRAII(piece, oldPos);
 	}
 
-	bool Board::movePieceRAII(Piece& piece, const Pos& newPos) {
+	bool Board::movePieceRAII(Piece& piece, const Pos& finalPos) {
 		lookAvaliableMoveForPlayer(piece);
-		if (find(piece.listMove.begin(), piece.listMove.end(), newPos) != piece.listMove.end()) {
-			chessboard[newPos.x][newPos.y].piece = move(chessboard[piece.pos.x][piece.pos.y].piece);
-			chessboard[newPos.x][newPos.y].piece->pos = newPos;
+		if (find(piece.listMove.begin(), piece.listMove.end(), finalPos) != piece.listMove.end()) {
+			chessboard[finalPos.x][finalPos.y].piece = move(chessboard[piece.pos.x][piece.pos.y].piece);
+			chessboard[finalPos.x][finalPos.y].piece->pos = finalPos;
 			return true;
 		}
 		return false;
