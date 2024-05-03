@@ -2,7 +2,7 @@
 * Classe Piece et ses dérivées qui définie l'apparence, le comportement et le nom d'une pièce. Enmagasine également la position et la liste des mouvements possible pour une pièce
 * \file   piece.hpp
 * \author Rayan Asma et Rosalie Lamoureux
-* \date   3 mars 2024
+* \date   3 mai 2024
 * Cree le 8 avril 2024
 */
 

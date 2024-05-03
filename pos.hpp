@@ -2,7 +2,7 @@
 * Classe Pos qui permet d'enmagasiner les positions des pièces/cases comme un couple (x,y) et qui permet également de faire plusieurs opérations pour simuler des déplacements.
 * \file   board.hpp
 * \author Rayan Asma et Rosalie Lamoureux
-* \date   3 mars 2024
+* \date   3 mai 2024
 * Cree le 8 avril 2024
 */
 

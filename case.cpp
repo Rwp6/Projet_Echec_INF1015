@@ -2,7 +2,7 @@
 * Implémentation de la classe Case crée dans case.hpp
 * \file   case.cpp
 * \author Rayan Asma et Rosalie Lamoureux
-* \date   3 mars 2024
+* \date   3 mai 2024
 * Cree le 8 avril 2024
 */
 

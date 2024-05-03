@@ -2,7 +2,7 @@
 * Tests unitaires qui vérifient que les mouvements des pièces sont valides, permet en un coup d'oeil de vérifier après un changement que le jeu marche toujours.
 * \file   ChessTest.hpp
 * \author Rayan Asma et Rosalie Lamoureux
-* \date   3 mars 2024
+* \date   3 mai 2024
 * Cree le 8 avril 2024
 */
 
