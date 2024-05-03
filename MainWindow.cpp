@@ -1,16 +1,26 @@
+/**
+* Implémentation de la class  MainWindow crée dans  MainWindow.hpp
+* \file   MainWindow.cpp
+* \author Rayan Asma et Rosalie Lamoureux
+* \date   3 mai 2024
+* Cree le 8 avril 2024
+*/
+
+
 #include "MainWindow.hpp"
 #include <QGridLayout>
 #include <QWidget>
 #include <QTimer>
 #include <QLabel>
-#include <QFont> 
+#include <QPushButton>
+#include <QFont>
 
 using gameManagement::Board;
 
 namespace interface {
     MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
         QWidget* centralWidget = new QWidget(this);
-        QGridLayout* layout = new QGridLayout;
+        QGridLayout* layout = new QGridLayout(this);
 
         setupChessBoard();
 
@@ -19,19 +29,43 @@ namespace interface {
                 layout->addWidget(chessBoard[row][col], row, col);
             }
         }
-        playerTurnLabel = new QLabel("Tour: Blancs", this);  // Initialiser avec le texte par défaut
-        playerTurnLabel->setWordWrap(true);
-        QFont labelFont("Arial", 24);
-        playerTurnLabel->setFont(labelFont);
-        playerTurnLabel->setAlignment(Qt::AlignCenter);
-        layout->addWidget(playerTurnLabel, 9, 2, 8, 4);
+       
 
+        playerTurnLabel = new QLabel("Tour: Blancs", this);
+        playerTurnLabel->setFont(QFont("Arial", 18)); 
+        playerTurnLabel->setAlignment(Qt::AlignCenter);
+
+
+        QLabel* additionalInfoLabel = new QLabel("Par: Rayan Asma et Rosalie Lamoureux", this);
+        additionalInfoLabel->setFont(QFont("Arial", 12));
+        additionalInfoLabel->setAlignment(Qt::AlignCenter);
+        additionalInfoLabel->setStyleSheet("color: red;");
+
+
+        QPushButton* button1 = new QPushButton("Position initiale", this);
+        QPushButton* button2 = new QPushButton("Mat Roi-Reine", this);
+        QPushButton* button3 = new QPushButton("Reine vs Tour", this);
+
+
+        QHBoxLayout* bottomLayout = new QHBoxLayout;
+        bottomLayout->addWidget(button1);
+        bottomLayout->addWidget(button2);
+        bottomLayout->addWidget(button3);
+        bottomLayout->addWidget(playerTurnLabel);
+        bottomLayout->addWidget(additionalInfoLabel);
+
+        layout->addLayout(bottomLayout, 9, 0, 1, 8); 
+
+  
+        connect(button1, &QPushButton::clicked, this, &MainWindow::setStartingPosition);
+        connect(button2, &QPushButton::clicked, this, &MainWindow::setQueenRookCheckmatePosition);
+        connect(button3, &QPushButton::clicked, this, &MainWindow::setQueenVsRookPosition);
 
         layout->setRowStretch(8, 1);
         layout->setColumnStretch(8, 1);
         centralWidget->setLayout(layout);
         setCentralWidget(centralWidget);
-
+       
     }
 
     void MainWindow::setupChessBoard() {
@@ -106,7 +140,7 @@ namespace interface {
         chessBoard[row][col]->setStyleSheet(QString("background-color: %1;").arg(color.name()));
     }
 
-    void MainWindow::updateChessBoardUI() {
+   void MainWindow::updateChessBoardUI() {
         for (int row = 0; row < 8; ++row) {
             for (int col = 0; col < 8; ++col) {
                 auto& piece = logic.chessboard[row][col].piece;
@@ -123,5 +157,24 @@ namespace interface {
     }
     void MainWindow::updateTurnLabel() {
         logic.isWhiteTurn() ? playerTurnLabel->setText("Tour: Blancs"): playerTurnLabel->setText("Tour: Noirs");
+    }
+
+
+    void MainWindow::setStartingPosition() {
+        logic = Board(Situation::Beggining);
+        updateChessBoardUI();
+        updateTurnLabel();
+    }
+
+    void MainWindow::setQueenRookCheckmatePosition() {
+        logic = Board(Situation::QueenRookCheckmate);
+        updateChessBoardUI();
+        updateTurnLabel();
+    }
+
+    void MainWindow::setQueenVsRookPosition() {
+        logic = Board(Situation::QueenVSRook);
+        updateChessBoardUI();
+        updateTurnLabel();
     }
 };
